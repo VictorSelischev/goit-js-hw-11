@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    // Помогает снять свойство line-heigth строчного элемента
+    display: block;
+    // Картинка тянется по ширине не шире своего оригинального размера
+    max-width: 100%;
+    // Гарантированно сохраняем пропорции изображения
+    height: auto;
+}
+
+textarea {
+    resize: none;
+}
+
+.list {
+    list-style: none;
+}

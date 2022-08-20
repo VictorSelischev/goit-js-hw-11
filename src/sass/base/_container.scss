@@ -1,0 +1,11 @@
+.container {
+  position: fixed;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  display: flex;
+  justify-content: center;
+
+  background-image: linear-gradient(180deg, #23379a, #09133c);
+}

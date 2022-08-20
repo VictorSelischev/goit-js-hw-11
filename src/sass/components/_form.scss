@@ -1,0 +1,32 @@
+.search-form {
+  display: flex;
+}
+input {
+  width: 200px;
+  padding: 12px;
+  border: none;
+  /* верхний левый угол */
+  border-top-left-radius: 8px;
+  /* нижний левый угол */
+  border-bottom-left-radius: 8px;
+
+  font-size: 15px;
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+
+  outline: none;
+}
+
+button {
+  width: 80px;
+  border: none;
+
+  /* верхний правый угол */
+  border-top-right-radius: 8px;
+  /* нижний правый угол */
+  border-bottom-right-radius: 8px;
+}
+
+.search-form_image {
+    margin-right: 20px;
+}
