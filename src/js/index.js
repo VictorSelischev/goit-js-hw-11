@@ -4,21 +4,25 @@ import Notiflix from 'notiflix';
 
 const formRef = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
+const btnPlus = document.querySelector('.load-more');
+
+gallery.innerHTML = '';
+let inputValue = '';
+let page = 1;
+// btnPlus.disabled = true;
 
 formRef.addEventListener('submit', handleSearchImagesSubmit);
+
+btnPlus.addEventListener('click', handleLoadMoreImagesClick);
 
 console.log('Связь есть');
 
 // =====================================
 // FUNCTION
 
-function handleSearchImagesSubmit(event) {
-  event.preventDefault();
-  const {
-    elements: { searchQuery },
-  } = event.target;
-
-  fetchPromise(searchQuery.value)
+function handleLoadMoreImagesClick() {
+  console.log(inputValue);
+  fetchPromise(inputValue)
     .then(object => {
       if (object.hits.length === 0) {
         Notiflix.Notify.failure(
@@ -26,8 +30,30 @@ function handleSearchImagesSubmit(event) {
         );
         return;
       }
-      gallery.innerHTML = '';
       renderListGallery(object);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+
+function handleSearchImagesSubmit(event) {
+  event.preventDefault();
+  const {
+    elements: { searchQuery },
+  } = event.currentTarget;
+  inputValue = searchQuery.value;
+  fetchPromise(inputValue)
+    .then(object => {
+      if (object.hits.length === 0) {
+        Notiflix.Notify.failure(
+          'Sorry, there are no images matching your search query. Please try again.'
+        );
+        return;
+      }
+      renderListGallery(object);
+      btnPlus.classList.remove("is-hidden");
+      // btnPlus.disabled = false;
     })
     .catch(error => {
       console.log(error);
@@ -37,17 +63,19 @@ function handleSearchImagesSubmit(event) {
 async function fetchPromise(search) {
   const BASE_URL = 'https://pixabay.com/api/';
   const API_KEY = '29396697-739a936ff485fb734bceeac87';
+  const PER_PAGE = 40;
 
   const response = await fetch(
-    `${BASE_URL}?key=${API_KEY}&q=${search}&image_type=photo&orientation=horizontal&safesearch=true`
+    `${BASE_URL}?key=${API_KEY}&q=${search}&image_type=photo&orientation=horizontal&safesearch=true&per_page=${PER_PAGE}&page=${page}`
   );
   const imagesPromise = response.json();
+  page += 1;
   return imagesPromise;
 }
 
 function renderListGallery(objectList) {
   const { hits } = objectList;
-  //   console.log(objectList);
+    console.log(objectList);
   // console.log(hits);
   const markup = hits
     .map(el => {
@@ -72,5 +100,5 @@ function renderListGallery(objectList) {
     })
     .join('');
 
-  gallery.innerHTML = markup;
+  gallery.insertAdjacentHTML('beforeend', markup);
 }
