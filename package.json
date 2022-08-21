@@ -26,7 +26,8 @@
     "notiflix": "^3.2.5",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
-    "posthtml-include": "^1.7.4"
+    "posthtml-include": "^1.7.4",
+    "simplelightbox": "^2.10.3"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead"
 }
