@@ -1,7 +1,6 @@
 // import axios from 'axios';
 // const axios = require('axios').default;
 import Notiflix from 'notiflix';
-import SimpleLightbox from "simplelightbox";
 
 const formRef = document.querySelector('#search-form');
 // const btnRef = document.querySelector('.search-form__button');
