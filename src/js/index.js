@@ -3,10 +3,10 @@
 import Notiflix from 'notiflix';
 
 const formRef = document.querySelector('#search-form');
+// const btnRef = document.querySelector('.search-form__button');
 const gallery = document.querySelector('.gallery');
 const btnPlus = document.querySelector('.load-more');
 
-gallery.innerHTML = '';
 let inputValue = '';
 let page = 1;
 // btnPlus.disabled = true;
@@ -21,6 +21,9 @@ console.log('Связь есть');
 // FUNCTION
 
 function handleLoadMoreImagesClick() {
+
+  // if (inputValue !== )
+
   console.log(inputValue);
   fetchPromise(inputValue)
     .then(object => {
@@ -42,7 +45,11 @@ function handleSearchImagesSubmit(event) {
   const {
     elements: { searchQuery },
   } = event.currentTarget;
+
+  page = 1;
+  gallery.innerHTML = '';
   inputValue = searchQuery.value;
+  
   fetchPromise(inputValue)
     .then(object => {
       if (object.hits.length === 0) {
@@ -53,7 +60,7 @@ function handleSearchImagesSubmit(event) {
       }
       renderListGallery(object);
       btnPlus.classList.remove("is-hidden");
-      // btnPlus.disabled = false;
+      // btnRef.disabled = true;
     })
     .catch(error => {
       console.log(error);
