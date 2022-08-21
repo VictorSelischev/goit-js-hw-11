@@ -46,10 +46,11 @@ function handleSearchImagesSubmit(event) {
     elements: { searchQuery },
   } = event.currentTarget;
 
+  btnPlus.classList.toggle("is-hidden");
   page = 1;
   gallery.innerHTML = '';
   inputValue = searchQuery.value;
-  
+
   fetchPromise(inputValue)
     .then(object => {
       if (object.hits.length === 0) {
@@ -75,7 +76,8 @@ async function fetchPromise(search) {
   const response = await fetch(
     `${BASE_URL}?key=${API_KEY}&q=${search}&image_type=photo&orientation=horizontal&safesearch=true&per_page=${PER_PAGE}&page=${page}`
   );
-  const imagesPromise = response.json();
+
+  const imagesPromise = await response.json();
   page += 1;
   return imagesPromise;
 }
